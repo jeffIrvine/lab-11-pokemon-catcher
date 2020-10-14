@@ -72,19 +72,30 @@ h2 {
     font-weight: bold;
 }
 
+label > img {
+    width: 200px;
+    height: 200px;
+}
+label > input {
+    display: none;
+}
+
+:checked + img {
+    border: solid 5px red;
+    border-radius: 100%;
+}
+
 .gutter-right {
     margin-right: 20px;
 }
-
-.main-logo {
-    animation: pulse 5s infinite ease-in-out;
+.hidden {
+    display: none;
 }
+
 
 header img {
     height: var(--header-height);
 }
-
-
 
 content {
     width: 80%;
@@ -94,13 +105,3 @@ p {
     margin: var(--gutter);
 }
   
-footer {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    height: var(--footer-height);
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--color3);
-    box-shadow: var(--shadow);
-}

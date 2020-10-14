@@ -1,4 +1,87 @@
 /* eslint-disable */
+// export const haulData = [ 
+//     {
+//         pokemon: 'bulbasur',
+//         encountered: 0,
+//         captured: 0,
+//     },
+//     {
+//         pokemon: 'ivysau',
+//         encountered: 0,
+//         captured: 0,
+//     },
+//     {
+//         pokemon: 'charmader',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+
+//         pokemon: 'charmeeon',
+//         encountered: 0,
+//         captured: 0,
+//     },
+//     {
+//         pokemon: 'charizrd',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'squirte',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'wartorle',
+//         encountered: 0,
+//         captured: 0,
+//     },
+//     {
+//         pokemon: 'blastose',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'caterpe',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'metapo',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'beedril',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'weedle',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'kakuna',
+//         encountered: 0,
+//         captured: 0,
+
+//     },
+//     {
+//         pokemon: 'pidgey',
+//         encountered: 0,
+//         captured: 0,
+//     },
+// ]
+
 
 export const rawPokemonData = [
     {
