@@ -4,19 +4,10 @@ const images = document.querySelectorAll('label > img');
 const radioButtons = document.querySelectorAll('input');
 // const caughtResultsSpan = document.querySelector('.caught-result');
 
-
+let numOfPlays = 0;
 const pokemonResults = [];
 
-// function pushPokemon() {
-    //     encounteredPokemon.push(pokeOne);
-    // }
-// for (let i = 0; i < someArray.length; i++) {
-    //     radio
-    
 
-    
-
-// }
 
 function getRandPokemon(someArray) {
     const index = Math.floor(Math.random() * someArray.length);
@@ -29,19 +20,14 @@ function renderPoke() {
     let pokeTwo = getRandPokemon(rawPokemonData);
     let pokeThree = getRandPokemon(rawPokemonData);
 
-    while (pokeOne.id === pokeTwo.id) {
+    while (pokeOne.id === pokeTwo.id || pokeTwo.id === pokeThree.id || pokeThree.id === pokeOne.id) {
         pokeOne = getRandPokemon(rawPokemonData);
-    }
-    while (pokeTwo.id === pokeThree.id) {
         pokeTwo = getRandPokemon(rawPokemonData);
     }
-    while (pokeThree.id === pokeOne.id) {
-        pokeThree = getRandPokemon(rawPokemonData);
-    }
 
-    findByName(pokeOne);
-    findByName(pokeTwo);
-    findByName(pokeThree);
+    findById(pokeOne);
+    findById(pokeTwo);
+    findById(pokeThree);
 
     radioButtons[0].value = pokeOne.id;
     images[0].src = pokeOne.url_image;
@@ -55,28 +41,45 @@ function renderPoke() {
 
 }
 
-function createNewItem(someId) {
+function createNewItem(pokemonResults, someId) {
     const pokemon = findById(rawPokemonData, someId);
     const element = {
         id: pokemon.id,
         pokemon: pokemon.pokemon,
-        encountered: 0,
+        encountered: 1,
         caught: 0
     };
     pokemonResults.push(element);
 }
 
 function createNewEncounter(rawPokemonData, someId) {
-        if (pokemonResults[i].id === someId) {
-            pokemonResults[i].encountered++;
+    if (pokemonResults[i].id === someId) {
+        pokemonResults[i].encountered++;
     }
 }
 
 
 for (let i = 0; i < radioButtons.length; i++) {
-    radioButtons[i].addEventListener('change', (e) => {
-        
+    radioButtons[i].addEventListener('click', (e) => {
+        //loop through the radios to get their value
+        numOfPlays++;
 
+        radioButtons.forEach((radio) => {
+            let pokeItem = findById(pokemonResults, Number(radio.value));
+            if (!pokeItem) {
+                createNewItem(pokemonResults, Number(radio.value));
+            } else {
+                pokeItem.encountered++;
+            }
+        });
+        // identify which to pick
+        let capturedPokemon = findById(pokemonResults, Number(e.target.value));
+        capturedPokemon.caught++;
+        console.log(pokemonResults);
+        renderPoke();
+        if (numOfPlays >= 10) {
+            window.location.href = './results';
+        }
     });
 }
 
@@ -91,5 +94,3 @@ function findById(someArray, someId,) {
 }
 
 renderPoke();
-
-//     function encounteredPokemon() {
