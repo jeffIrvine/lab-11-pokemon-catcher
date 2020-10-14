@@ -14,39 +14,7 @@ function getRandPokemon(someArray) {
     return someArray[index];
 }
 
-function renderPoke() {
-    const radioButtons = document.querySelectorAll('input');
-
-
-    let pokeOne = getRandPokemon(rawPokemonData);
-    let pokeTwo = getRandPokemon(rawPokemonData);
-    let pokeThree = getRandPokemon(rawPokemonData);
-
-    while (pokeOne.id === pokeTwo.id || pokeTwo.id === pokeThree.id || pokeThree.id === pokeOne.id) {
-        pokeOne = getRandPokemon(rawPokemonData);
-        pokeTwo = getRandPokemon(rawPokemonData);
-    }
-
-    findById(pokeOne);
-    findById(pokeTwo);
-    findById(pokeThree);
-
-    radioButtons[0].value = pokeOne.id;
-    images[0].src = pokeOne.url_image;
-
-    radioButtons[1].value = pokeTwo.id;
-    images[1].src = pokeTwo.url_image;
-
-    radioButtons[2].value = pokeThree.id;
-    images[2].src = pokeThree.url_image;
-
-
-}
-// function createNewEncounter(rawPokemonData, someId) {
-//     if (pokemonResults[i].id === someId) {
-//         pokemonResults[i].encountered++;
-//     }
-// }
+renderPoke();
 
 for (let i = 0; i < radioButtons.length; i++) {
     radioButtons[i].addEventListener('click', (e) => {
@@ -64,15 +32,42 @@ for (let i = 0; i < radioButtons.length; i++) {
         // identify which to pick
         let capturedPokemon = findById(pokemonResults, Number(e.target.value));
         capturedPokemon.caught++;
-        console.log(pokemonResults);
 
         setInLocalStorage(HAUL, pokemonResults);
 
         if (numOfPlays >= 10) {
-            window.location.href = './results';
+            window.location.href = './results/index.html';
         }
         renderPoke();
+
     });
+}
+
+function renderPoke() {
+
+
+    let pokeOne = getRandPokemon(rawPokemonData);
+    let pokeTwo = getRandPokemon(rawPokemonData);
+    let pokeThree = getRandPokemon(rawPokemonData);
+
+    while (pokeOne.id === pokeTwo.id || pokeTwo.id === pokeThree.id || pokeThree.id === pokeOne.id) {
+        pokeOne = getRandPokemon(rawPokemonData);
+        pokeTwo = getRandPokemon(rawPokemonData);
+    }
+
+    radioButtons[0].value = pokeOne.id;
+    console.log(radioButtons[0]);
+    images[0].src = pokeOne.url_image;
+    // radioButtons[0].checked = true;
+
+    radioButtons[1].value = pokeTwo.id;
+    images[1].src = pokeTwo.url_image;
+    // radioButtons[1].checked = false;
+
+    radioButtons[2].value = pokeThree.id;
+    images[2].src = pokeThree.url_image;
+    // radioButtons[2].checked = false;
+
 }
 
 function createNewItem(pokemonResults, someId) {
@@ -109,4 +104,3 @@ function setInLocalStorage(key, value) {
     return value;
 }
 
-renderPoke();
