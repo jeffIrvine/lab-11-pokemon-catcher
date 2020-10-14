@@ -7,7 +7,7 @@ const radioButtons = document.querySelectorAll('input');
 let numOfPlays = 0;
 const pokemonResults = [];
 
-
+const HAUL = 'HAUL';
 
 function getRandPokemon(someArray) {
     const index = Math.floor(Math.random() * someArray.length);
@@ -15,6 +15,8 @@ function getRandPokemon(someArray) {
 }
 
 function renderPoke() {
+    const radioButtons = document.querySelectorAll('input');
+
 
     let pokeOne = getRandPokemon(rawPokemonData);
     let pokeTwo = getRandPokemon(rawPokemonData);
@@ -40,24 +42,11 @@ function renderPoke() {
 
 
 }
-
-function createNewItem(pokemonResults, someId) {
-    const pokemon = findById(rawPokemonData, someId);
-    const element = {
-        id: pokemon.id,
-        pokemon: pokemon.pokemon,
-        encountered: 1,
-        caught: 0
-    };
-    pokemonResults.push(element);
-}
-
-function createNewEncounter(rawPokemonData, someId) {
-    if (pokemonResults[i].id === someId) {
-        pokemonResults[i].encountered++;
-    }
-}
-
+// function createNewEncounter(rawPokemonData, someId) {
+//     if (pokemonResults[i].id === someId) {
+//         pokemonResults[i].encountered++;
+//     }
+// }
 
 for (let i = 0; i < radioButtons.length; i++) {
     radioButtons[i].addEventListener('click', (e) => {
@@ -76,13 +65,26 @@ for (let i = 0; i < radioButtons.length; i++) {
         let capturedPokemon = findById(pokemonResults, Number(e.target.value));
         capturedPokemon.caught++;
         console.log(pokemonResults);
-        renderPoke();
+
+        setInLocalStorage(HAUL, pokemonResults);
+
         if (numOfPlays >= 10) {
             window.location.href = './results';
         }
+        renderPoke();
     });
 }
 
+function createNewItem(pokemonResults, someId) {
+    const pokemon = findById(rawPokemonData, someId);
+    const element = {
+        id: pokemon.id,
+        pokemon: pokemon.pokemon,
+        encountered: 1,
+        caught: 0
+    };
+    pokemonResults.push(element);
+}
 
 function findById(someArray, someId,) {
     for (let i = 0; i < someArray.length; i++) {
@@ -91,6 +93,20 @@ function findById(someArray, someId,) {
             return item;
         }
     }
+}
+
+export function getFromLocalStorage(key) {
+    const item = localStorage.getItem(key);
+
+    return JSON.parse(item);
+}
+
+function setInLocalStorage(key, value) {
+    const stringyItems = JSON.stringify(value);
+
+    localStorage.setItem(key, stringyItems);
+
+    return value;
 }
 
 renderPoke();
