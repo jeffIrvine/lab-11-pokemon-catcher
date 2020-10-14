@@ -5,31 +5,18 @@ const radioButtons = document.querySelectorAll('input');
 // const caughtResultsSpan = document.querySelector('.caught-result');
 
 
-
-
-let caughtResults = 0;
-let encounteredResults = 0;
-const caughtPokemon = [];
-const encounteredPokemon = [];
-
-
-
+const pokemonResults = [];
 
 // function pushPokemon() {
     //     encounteredPokemon.push(pokeOne);
     // }
 // for (let i = 0; i < someArray.length; i++) {
     //     radio
-  
-function findByName(somePokemon) {
-    for (let i = 0; i < encounteredPokemon.length; i++) {
-        if (encounteredPokemon[i].pokemon === somePokemon.pokemon) {
-            encounteredPokemon[i].encountered++;
-            return;
-        }
-    }
-    encounteredPokemon.push({ pokemon: somePokemon.pokemon, encountered: 1, captured: 0 });
-}
+    
+
+    
+
+// }
 
 function getRandPokemon(someArray) {
     const index = Math.floor(Math.random() * someArray.length);
@@ -56,7 +43,6 @@ function renderPoke() {
     findByName(pokeTwo);
     findByName(pokeThree);
 
-    console.log(encounteredPokemon);
     radioButtons[0].value = pokeOne.id;
     images[0].src = pokeOne.url_image;
 
@@ -65,15 +51,45 @@ function renderPoke() {
 
     radioButtons[2].value = pokeThree.id;
     images[2].src = pokeThree.url_image;
+
+
 }
-//     // so now we want to create an add event listnr on the button and once we click on the image then we want to incriment captured when we click on it . 
-//     for (let i = 0; i < radioButtons.length; i++) {
-//         radioButtons[i].addEventListener('change', (e) => {
-//             console.log(e.target.value);
-//             caughtPokemon.
-//         );
-//     }
-// }
+
+function createNewItem(someId) {
+    const pokemon = findById(rawPokemonData, someId);
+    const element = {
+        id: pokemon.id,
+        pokemon: pokemon.pokemon,
+        encountered: 0,
+        caught: 0
+    };
+    pokemonResults.push(element);
+}
+
+function createNewEncounter(rawPokemonData, someId) {
+        if (pokemonResults[i].id === someId) {
+            pokemonResults[i].encountered++;
+    }
+}
+
+
+for (let i = 0; i < radioButtons.length; i++) {
+    radioButtons[i].addEventListener('change', (e) => {
+        
+
+    });
+}
+
+
+function findById(someArray, someId,) {
+    for (let i = 0; i < someArray.length; i++) {
+        const item = someArray[i];
+        if (item.id === someId) {
+            return item;
+        }
+    }
+}
 
 renderPoke();
-// "rolls loop 10 times "
+
+//     function encounteredPokemon() {
