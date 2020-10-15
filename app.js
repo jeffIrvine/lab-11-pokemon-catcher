@@ -1,8 +1,8 @@
 import { rawPokemonData } from './data.js';
+import { findById, setInLocalStorage } from './utils.js';
 
 const images = document.querySelectorAll('label > img');
 const radioButtons = document.querySelectorAll('input');
-// const caughtResultsSpan = document.querySelector('.caught-result');
 
 let numOfPlays = 0;
 const pokemonResults = [];
@@ -45,7 +45,6 @@ for (let i = 0; i < radioButtons.length; i++) {
 
 function renderPoke() {
 
-
     let pokeOne = getRandPokemon(rawPokemonData);
     let pokeTwo = getRandPokemon(rawPokemonData);
     let pokeThree = getRandPokemon(rawPokemonData);
@@ -56,7 +55,6 @@ function renderPoke() {
     }
 
     radioButtons[0].value = pokeOne.id;
-    console.log(radioButtons[0]);
     images[0].src = pokeOne.url_image;
     // radioButtons[0].checked = true;
 
@@ -80,27 +78,3 @@ function createNewItem(pokemonResults, someId) {
     };
     pokemonResults.push(element);
 }
-
-function findById(someArray, someId,) {
-    for (let i = 0; i < someArray.length; i++) {
-        const item = someArray[i];
-        if (item.id === someId) {
-            return item;
-        }
-    }
-}
-
-export function getFromLocalStorage(key) {
-    const item = localStorage.getItem(key);
-
-    return JSON.parse(item);
-}
-
-function setInLocalStorage(key, value) {
-    const stringyItems = JSON.stringify(value);
-
-    localStorage.setItem(key, stringyItems);
-
-    return value;
-}
-
